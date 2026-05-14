@@ -2,6 +2,7 @@ import "server-only";
 
 import { z } from "zod";
 
+import { validateQuestionSafetyWithGemini } from "@/lib/ai/questionSafety";
 import {
   questionInputMessages,
   validateQuestionInput,
@@ -166,6 +167,36 @@ export async function submitQuickQuestion(
       studentMessage: "참여 정보를 다시 확인해 주세요.",
       warningRequired: false,
     };
+  }
+
+  try {
+    const safetyResult = await validateQuestionSafetyWithGemini(questionText);
+
+    if (!safetyResult.isValid) {
+      await recordAttempt({
+        activityId,
+        questionText,
+        reason: safetyResult.reason,
+        result: "rejected",
+        studentId,
+      });
+
+      const rejectionState = await increaseRejectedCount({
+        currentRejectedCount: student.rejected_count,
+        previousWarningShown: student.warning_shown,
+        studentId,
+      });
+
+      return {
+        accepted: false,
+        reason: safetyResult.reason,
+        rejectedCount: rejectionState.rejectedCount,
+        studentMessage: safetyResult.studentMessage,
+        warningRequired: rejectionState.warningRequired,
+      };
+    }
+  } catch (error) {
+    console.error("Gemini 질문 안전 필터 실패. 로컬 검증 결과로 진행합니다.", error);
   }
 
   const { data: question, error: questionError } = await supabase

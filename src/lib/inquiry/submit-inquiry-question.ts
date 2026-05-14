@@ -2,6 +2,7 @@ import "server-only";
 
 import { z } from "zod";
 
+import { validateQuestionSafetyWithGemini } from "@/lib/ai/questionSafety";
 import { getServiceSupabaseClient } from "@/lib/supabase/server";
 
 import {
@@ -75,6 +76,20 @@ export async function submitInquiryQuestion(
       reason: "server_error",
       studentMessage: "참여 정보를 다시 확인해 주세요.",
     };
+  }
+
+  try {
+    const aiSafetyResult = await validateQuestionSafetyWithGemini(questionText);
+
+    if (!aiSafetyResult.isValid) {
+      return {
+        accepted: false,
+        reason: aiSafetyResult.reason,
+        studentMessage: aiSafetyResult.studentMessage,
+      };
+    }
+  } catch (error) {
+    console.error("Gemini 탐구 질문 안전 필터 실패. 로컬 검증 결과로 진행합니다.", error);
   }
 
   const { data: question, error: questionError } = await supabase
