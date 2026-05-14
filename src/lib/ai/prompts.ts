@@ -63,8 +63,8 @@ ${input.questionText}`;
 }
 
 export function buildInquiryHintPrompt(input: {
-  analysis: MaterialAnalysis | null;
-  materialText: string | null;
+  analysis?: MaterialAnalysis | null;
+  materialText?: string | null;
   previousTurns?: Array<{
     aiHint: string;
     studentText: string;
