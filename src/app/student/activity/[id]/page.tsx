@@ -8,6 +8,8 @@ import {
 } from "@/lib/activity-labels";
 import { getServiceSupabaseClient } from "@/lib/supabase/server";
 
+import { StudentMaterialPreview } from "../../StudentMaterialPreview";
+
 type StudentActivityPageProps = {
   params: Promise<{ id: string }>;
   searchParams: Promise<{ studentId?: string }>;
@@ -22,28 +24,6 @@ type ModeCardProps = {
 
 function formatMinutes(seconds: number) {
   return `${Math.max(1, Math.round(seconds / 60))}분`;
-}
-
-function getPreviewText(summary: string | null, materialText: string | null) {
-  if (summary?.trim()) {
-    return summary;
-  }
-
-  const text = materialText?.trim();
-
-  if (!text) {
-    return "선생님이 자료를 준비하고 있어요.";
-  }
-
-  return text.length > 140 ? `${text.slice(0, 140)}...` : text;
-}
-
-function getKeywords(value: unknown) {
-  if (!Array.isArray(value)) {
-    return [];
-  }
-
-  return value.filter((item): item is string => typeof item === "string");
 }
 
 function ModeCard({ description, enabled, href, mode }: ModeCardProps) {
@@ -110,7 +90,7 @@ export default async function StudentActivityPage({
     supabase
       .from("activities")
       .select(
-        "id,title,material_text,material_summary,material_keywords,time_limit_sec,enabled_modes,solve_mode_open",
+        "id,title,material_text,material_type,material_url,time_limit_sec,enabled_modes,solve_mode_open,status",
       )
       .eq("id", id)
       .single(),
@@ -147,6 +127,26 @@ export default async function StudentActivityPage({
     );
   }
 
+  if (activity.status === "closed") {
+    return (
+      <PageShell
+        description={`${student.display_name}님, 이 활동은 선생님이 종료했어요.`}
+        eyebrow="질문 코치"
+        title={activity.title}
+      >
+        <Card className="grid gap-4">
+          <p className="text-lg leading-8 text-slate-600">
+            지금은 새 질문이나 답변을 제출할 수 없어요. 선생님 안내를 기다려
+            주세요.
+          </p>
+          <Button href="/" variant="quiet">
+            처음으로
+          </Button>
+        </Card>
+      </PageShell>
+    );
+  }
+
   const [
     { count: questionCount, error: questionCountError },
     { count: answerCount, error: answerCountError },
@@ -166,11 +166,6 @@ export default async function StudentActivityPage({
   const solveEnabled =
     enabledModes.solve_friend_question || activity.solve_mode_open;
   const studentQuery = `?studentId=${student.id}`;
-  const previewText = getPreviewText(
-    activity.material_summary,
-    activity.material_text,
-  );
-  const keywords = getKeywords(activity.material_keywords);
 
   return (
     <PageShell
@@ -180,23 +175,12 @@ export default async function StudentActivityPage({
     >
       <section className="grid gap-4 lg:grid-cols-[1.4fr_0.6fr]">
         <Card>
-          <p className="text-sm font-bold text-sky-700">자료 미리보기</p>
-          <h2 className="mt-2 text-2xl font-bold">{activity.title}</h2>
-          <p className="mt-3 whitespace-pre-wrap text-lg leading-8 text-slate-700">
-            {previewText}
-          </p>
-          {keywords.length ? (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {keywords.map((keyword) => (
-                <span
-                  className="rounded-full bg-sky-50 px-3 py-1 text-sm font-bold text-sky-700"
-                  key={keyword}
-                >
-                  {keyword}
-                </span>
-              ))}
-            </div>
-          ) : null}
+          <h2 className="mb-4 text-2xl font-bold">{activity.title}</h2>
+          <StudentMaterialPreview
+            materialText={activity.material_text}
+            materialType={activity.material_type}
+            materialUrl={activity.material_url}
+          />
         </Card>
 
         <Card className="grid content-start gap-4">

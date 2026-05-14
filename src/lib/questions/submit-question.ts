@@ -164,14 +164,16 @@ async function recordAttempt(input: {
 
 async function increaseRejectedCount(input: {
   currentRejectedCount: number | null;
+  previousWarningShown: boolean | null;
   studentId: string;
 }) {
   const nextRejectedCount = (input.currentRejectedCount ?? 0) + 1;
+  const warningRequired =
+    input.previousWarningShown !== true && nextRejectedCount >= 3;
   const supabase = getServiceSupabaseClient();
-  const updateValues =
-    nextRejectedCount >= 3
-      ? { rejected_count: nextRejectedCount, warning_shown: true }
-      : { rejected_count: nextRejectedCount };
+  const updateValues = warningRequired
+    ? { rejected_count: nextRejectedCount, warning_shown: true }
+    : { rejected_count: nextRejectedCount };
   const { error } = await supabase
     .from("students")
     .update(updateValues)
@@ -181,7 +183,10 @@ async function increaseRejectedCount(input: {
     throw new Error(error.message);
   }
 
-  return nextRejectedCount;
+  return {
+    rejectedCount: nextRejectedCount,
+    warningRequired,
+  };
 }
 
 async function getQuestionFilter(input: {
@@ -234,6 +239,48 @@ export async function submitQuickQuestion(
   const { activityId, studentId } = parsed.data;
   const questionText = parsed.data.questionText.trim();
   const supabase = getServiceSupabaseClient();
+  const localResult = runLocalQuestionFilter(questionText);
+
+  if (!localResult.accepted) {
+    const { data: student } = await supabase
+      .from("students")
+      .select("id,activity_id,rejected_count,warning_shown")
+      .eq("id", studentId)
+      .single();
+
+    if (!student || student.activity_id !== activityId) {
+      return {
+        accepted: false,
+        reason: "server_error",
+        rejectedCount: 0,
+        studentMessage: "참여 정보를 다시 확인해 주세요.",
+        warningRequired: false,
+      };
+    }
+
+    await recordAttempt({
+      activityId,
+      questionText,
+      reason: localResult.reason,
+      result: "rejected",
+      studentId,
+    });
+
+    const rejectionState = await increaseRejectedCount({
+      currentRejectedCount: student.rejected_count,
+      previousWarningShown: student.warning_shown,
+      studentId,
+    });
+
+    return {
+      accepted: false,
+      reason: localResult.reason,
+      rejectedCount: rejectionState.rejectedCount,
+      studentMessage: localResult.studentMessage,
+      warningRequired: rejectionState.warningRequired,
+    };
+  }
+
   const [{ data: activity }, { data: student }] = await Promise.all([
     supabase
       .from("activities")
@@ -271,17 +318,18 @@ export async function submitQuickQuestion(
       studentId,
     });
 
-    const rejectedCount = await increaseRejectedCount({
+    const rejectionState = await increaseRejectedCount({
       currentRejectedCount: student.rejected_count,
+      previousWarningShown: student.warning_shown,
       studentId,
     });
 
     return {
       accepted: false,
       reason: filterResult.reason,
-      rejectedCount,
+      rejectedCount: rejectionState.rejectedCount,
       studentMessage: filterResult.studentMessage,
-      warningRequired: rejectedCount >= 3,
+      warningRequired: rejectionState.warningRequired,
     };
   }
 
@@ -302,7 +350,7 @@ export async function submitQuickQuestion(
       reason: "server_error",
       rejectedCount: student.rejected_count ?? 0,
       studentMessage: studentMessages.server_error,
-      warningRequired: (student.rejected_count ?? 0) >= 3,
+      warningRequired: false,
     };
   }
 
@@ -323,6 +371,6 @@ export async function submitQuickQuestion(
     reason: "accepted",
     rejectedCount: student.rejected_count ?? 0,
     studentMessage: studentMessages.accepted,
-    warningRequired: (student.rejected_count ?? 0) >= 3,
+    warningRequired: false,
   };
 }

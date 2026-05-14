@@ -3,26 +3,13 @@ import { Card } from "@/components/Card";
 import { PageShell } from "@/components/PageShell";
 import { getServiceSupabaseClient } from "@/lib/supabase/server";
 
+import { StudentMaterialPreview } from "../../StudentMaterialPreview";
 import { QuickQuestionForm } from "./QuickQuestionForm";
 
 type QuickPageProps = {
   params: Promise<{ id: string }>;
   searchParams: Promise<{ studentId?: string }>;
 };
-
-function getPreviewText(summary: string | null, materialText: string | null) {
-  if (summary?.trim()) {
-    return summary;
-  }
-
-  const text = materialText?.trim();
-
-  if (!text) {
-    return "선생님이 자료를 준비하고 있어요.";
-  }
-
-  return text.length > 180 ? `${text.slice(0, 180)}...` : text;
-}
 
 function ErrorView({
   description,
@@ -64,7 +51,7 @@ export default async function QuickPage({ params, searchParams }: QuickPageProps
   ] = await Promise.all([
     supabase
       .from("activities")
-      .select("id,title,material_text,material_summary,time_limit_sec")
+      .select("id,title,material_text,material_type,material_url,time_limit_sec")
       .eq("id", id)
       .single(),
     supabase
@@ -107,7 +94,8 @@ export default async function QuickPage({ params, searchParams }: QuickPageProps
     );
   }
 
-  const initialWarningRequired = student.rejected_count >= 3;
+  const initialWarningRequired =
+    student.rejected_count >= 3 && !student.warning_shown;
 
   if (initialWarningRequired && !student.warning_shown) {
     await supabase
@@ -124,12 +112,11 @@ export default async function QuickPage({ params, searchParams }: QuickPageProps
     >
       <section className="grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
         <Card className="grid content-start gap-4">
-          <div>
-            <p className="text-sm font-bold text-sky-700">자료 미리보기</p>
-            <p className="mt-3 whitespace-pre-wrap text-lg leading-8 text-slate-700">
-              {getPreviewText(activity.material_summary, activity.material_text)}
-            </p>
-          </div>
+          <StudentMaterialPreview
+            materialText={activity.material_text}
+            materialType={activity.material_type}
+            materialUrl={activity.material_url}
+          />
           <Button
             href={`/student/activity/${activity.id}?studentId=${student.id}`}
             variant="quiet"

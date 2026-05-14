@@ -27,8 +27,8 @@ const createActivitySchema = z.object({
   content: z
     .string()
     .trim()
-    .min(1, "자료 내용을 입력해 주세요.")
     .max(4000, "자료 내용은 4000자 안으로 입력해 주세요."),
+  materialUrl: z.string().trim().url("이미지 업로드 주소가 올바르지 않아요.").optional(),
   timeLimitMinutes: z.coerce
     .number()
     .int("제한 시간은 분 단위 숫자로 입력해 주세요.")
@@ -57,6 +57,7 @@ export async function createActivityAction(
     title: formData.get("title"),
     materialType: formData.get("materialType"),
     content: formData.get("content"),
+    materialUrl: formData.get("materialUrl") || undefined,
     timeLimitMinutes: formData.get("timeLimitMinutes"),
     openModes: formData.getAll("openModes"),
   });
@@ -67,9 +68,15 @@ export async function createActivityAction(
     };
   }
 
-  if (parsed.data.materialType !== "text") {
+  if (parsed.data.materialType !== "image" && !parsed.data.content) {
     return {
-      error: "현재 MVP에서는 text 자료 입력만 사용할 수 있어요.",
+      error: "자료 내용을 입력해 주세요.",
+    };
+  }
+
+  if (parsed.data.materialType === "image" && !parsed.data.materialUrl) {
+    return {
+      error: "이미지를 업로드해 주세요.",
     };
   }
 
@@ -87,7 +94,8 @@ export async function createActivityAction(
         teacher_id: "demo-teacher",
         invite_code: inviteCode,
         material_type: parsed.data.materialType,
-        material_text: parsed.data.content,
+        material_text: parsed.data.content || null,
+        material_url: parsed.data.materialUrl ?? null,
         time_limit_sec: parsed.data.timeLimitMinutes * 60,
         enabled_modes: enabledModes,
         solve_mode_open: enabledModes.solve_friend_question,

@@ -1,13 +1,34 @@
 import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { PageShell } from "@/components/PageShell";
-import { Textarea } from "@/components/Textarea";
 import { getServiceSupabaseClient } from "@/lib/supabase/server";
+
+import { StudentMaterialPreview } from "../../StudentMaterialPreview";
+import { InquiryQuestionForm } from "./InquiryQuestionForm";
 
 type InquiryPageProps = {
   params: Promise<{ id: string }>;
   searchParams: Promise<{ studentId?: string }>;
 };
+
+function ErrorView({
+  description,
+  title,
+}: {
+  description: string;
+  title: string;
+}) {
+  return (
+    <PageShell description={description} eyebrow="탐구 질문" title={title}>
+      <Card className="grid gap-4">
+        <p className="text-lg text-slate-600">{description}</p>
+        <Button href="/" variant="quiet">
+          처음으로
+        </Button>
+      </Card>
+    </PageShell>
+  );
+}
 
 export default async function InquiryPage({
   params,
@@ -15,38 +36,87 @@ export default async function InquiryPage({
 }: InquiryPageProps) {
   const { id } = await params;
   const { studentId } = await searchParams;
+
+  if (!studentId) {
+    return (
+      <ErrorView
+        description="초대 링크에서 이름을 쓰고 다시 들어와 주세요."
+        title="참여 정보가 없어요"
+      />
+    );
+  }
+
   const supabase = getServiceSupabaseClient();
-  const { data: activity } = await supabase
-    .from("activities")
-    .select("id,title")
-    .eq("id", id)
-    .single();
-  const activityId = activity?.id ?? id;
-  const studentQuery = studentId ? `?studentId=${studentId}` : "";
+  const [
+    { data: activity, error: activityError },
+    { data: student, error: studentError },
+  ] = await Promise.all([
+    supabase
+      .from("activities")
+      .select("id,title,material_text,material_type,material_url")
+      .eq("id", id)
+      .single(),
+    supabase
+      .from("students")
+      .select("id,display_name,activity_id")
+      .eq("id", studentId)
+      .single(),
+  ]);
+
+  if (activityError || !activity) {
+    return (
+      <ErrorView
+        description={
+          activityError?.message
+            ? `활동을 불러오지 못했어요: ${activityError.message}`
+            : "활동 주소가 맞는지 선생님께 확인해 주세요."
+        }
+        title="활동을 찾을 수 없어요"
+      />
+    );
+  }
+
+  if (studentError || !student || student.activity_id !== activity.id) {
+    return (
+      <ErrorView
+        description={
+          studentError?.message
+            ? `학생 정보를 불러오지 못했어요: ${studentError.message}`
+            : "이 활동에 참여한 학생 정보가 아니에요."
+        }
+        title="학생 정보를 확인해 주세요"
+      />
+    );
+  }
 
   return (
     <PageShell
-      description="이유와 증거를 생각하며 질문을 다듬어요."
-      eyebrow={activity?.title ?? "질문 활동"}
+      description={`${student.display_name}님, 질문을 더 깊게 다듬어 보세요.`}
+      eyebrow={activity.title}
       title="탐구 질문 만들기"
     >
-      <Card className="mx-auto grid w-full max-w-2xl gap-5">
-        <div className="grid gap-3">
-          <p className="rounded-xl bg-sky-100 p-4 text-xl font-bold">
-            왜 그렇게 생각했나요?
-          </p>
-          <p className="rounded-xl bg-teal-50 p-4 text-xl font-bold">
-            더 알아보면 좋은 것은 무엇인가요?
-          </p>
-        </div>
-        <Textarea placeholder="내 탐구 질문을 써 보세요." />
-        <div className="flex flex-wrap gap-3">
-          <Button variant="secondary">저장하기</Button>
-          <Button href={`/student/activity/${activityId}${studentQuery}`} variant="quiet">
-            돌아가기
+      <section className="grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
+        <Card className="grid content-start gap-4">
+          <StudentMaterialPreview
+            materialText={activity.material_text}
+            materialType={activity.material_type}
+            materialUrl={activity.material_url}
+          />
+          <Button
+            href={`/student/activity/${activity.id}?studentId=${student.id}`}
+            variant="quiet"
+          >
+            활동으로 돌아가기
           </Button>
-        </div>
-      </Card>
+        </Card>
+
+        <Card>
+          <InquiryQuestionForm
+            activityId={activity.id}
+            studentId={student.id}
+          />
+        </Card>
+      </section>
     </PageShell>
   );
 }

@@ -143,12 +143,12 @@ export function QuickQuestionForm({
       ) : null}
 
       {warningRequired ? (
-        <div className="grid gap-4 rounded-xl bg-amber-50 p-5 ring-1 ring-amber-200">
+        <div className="grid gap-4 rounded-xl border border-red-300 bg-red-50 p-5">
           <div className="grid gap-3">
-            <h2 className="text-2xl font-bold text-amber-900">
+            <h2 className="text-2xl font-bold text-red-800">
               ⚠️ 잠깐 멈춰 주세요
             </h2>
-            <div className="grid gap-1 text-lg leading-8 text-amber-900">
+            <div className="grid gap-1 text-lg leading-8 text-red-700">
               <p>작성한 질문이 여러 번 받아들여지지 않았어요.</p>
               <p>이 활동은 자료를 보고 궁금한 점을 질문으로 만드는 시간이에요.</p>
               <p>친구들이 함께 읽을 수 있는 질문을 써 주세요.</p>
@@ -183,7 +183,7 @@ export function QuickQuestionForm({
             onClick={submitQuestion}
             type="button"
           >
-            {isSubmitting ? "보내는 중..." : "질문 보내기"}
+            {isSubmitting ? "질문을 확인하고 있어요..." : "질문 보내기"}
           </Button>
         </>
       )}

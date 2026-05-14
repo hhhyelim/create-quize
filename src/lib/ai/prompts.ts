@@ -61,3 +61,69 @@ ${JSON.stringify({
 학생 질문:
 ${input.questionText}`;
 }
+
+export function buildInquiryHintPrompt(input: {
+  analysis: MaterialAnalysis | null;
+  materialText: string | null;
+  previousTurns?: Array<{
+    aiHint: string;
+    studentText: string;
+  }>;
+  step?: number;
+  studentText: string;
+}) {
+  const materialContext =
+    input.materialText?.trim() || "교사가 입력한 자료 텍스트가 없습니다.";
+  const analysisHints = input.analysis
+    ? JSON.stringify({
+        keywords: input.analysis.keywords,
+        main_elements: input.analysis.main_elements,
+        related_scopes: input.analysis.related_scopes,
+      })
+    : "자료 분석 단서가 없습니다.";
+
+  const previousTurns = input.previousTurns?.length
+    ? input.previousTurns
+        .map(
+          (turn, index) =>
+            `${index + 1}. 학생: ${turn.studentText}\n   AI: ${turn.aiHint}`,
+        )
+        .join("\n")
+    : "아직 이전 대화가 없습니다.";
+
+  return `# Role
+너는 제공된 [자료 텍스트]를 바탕으로 학생이 스스로 구체적인 질문을 만들도록 돕는 '데이터 기반 질문 코칭 선생님'이다.
+
+# Rule
+1. 학생에게 질문의 실마리를 줄 때, 반드시 업로드된 [자료 텍스트]에 나오는 장소, 대상, 현상을 언급하며 유도한다.
+2. 부족한 점을 지적하기보다, 보완할 점을 제안하는 어투를 사용한다.
+3. 한 번의 대화에는 반드시 하나의 단계만 진행한다.
+4. 학생이 요소를 모두 찾으면, 마지막에는 반드시 "자, 이제 이 단어들을 넣어서 직접 질문 문장을 다시 써볼까요?"라고 요청한다.
+
+# Step
+- 1단계 (범위 좁히기): 질문의 대상이 막연하면 구체적인 장소나 상황을 묻는다.
+- 2단계 (방향 정하기): '원인'에 집중할 것인지 '영향(결과)'에 집중할 것인지 선택하게 한다.
+- 3단계 (연관 대상 찾기): 그 현상으로 인해 영향을 받는 구체적인 객체(사람, 동물, 환경 등)를 제안한다.
+- 4단계 (문장 완성): 학생이 고른 키워드를 조합해 스스로 질문하게 한다.
+
+# Tone & Manner
+- 초등 수준의 눈높이에 맞춘 다정하고 격려하는 말투.
+- "좋은 시작이에요!", "조금 더 구체적이면 좋겠어요" 같은 반응을 자연스럽게 포함한다.
+- 완성된 질문 예시, 정답, 점수는 주지 않는다.
+- 쉬운 말로 3문장 이내로 답한다.
+
+[자료 텍스트]
+${materialContext}
+
+[자료 분석 단서]
+${analysisHints}
+
+[이전 대화]
+${previousTurns}
+
+[현재 단계]
+${input.step ?? 1}
+
+[학생의 마지막 말]
+${input.studentText}`;
+}

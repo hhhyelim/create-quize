@@ -228,31 +228,28 @@ export type Database = {
         Row: {
           id: string;
           activity_id: string;
-          student_id: string | null;
-          question_attempt_id: string | null;
-          prompt: string;
-          response: string;
-          metadata: Json | null;
+          student_id: string;
+          step: number;
+          student_text: string;
+          ai_hint: string;
           created_at: string;
         };
         Insert: {
           id?: string;
           activity_id: string;
-          student_id?: string | null;
-          question_attempt_id?: string | null;
-          prompt: string;
-          response: string;
-          metadata?: Json | null;
+          student_id: string;
+          step?: number;
+          student_text: string;
+          ai_hint: string;
           created_at?: string;
         };
         Update: {
           id?: string;
           activity_id?: string;
-          student_id?: string | null;
-          question_attempt_id?: string | null;
-          prompt?: string;
-          response?: string;
-          metadata?: Json | null;
+          student_id?: string;
+          step?: number;
+          student_text?: string;
+          ai_hint?: string;
           created_at?: string;
         };
         Relationships: [
@@ -268,13 +265,6 @@ export type Database = {
             columns: ["student_id"];
             isOneToOne: false;
             referencedRelation: "students";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "coaching_logs_question_attempt_id_fkey";
-            columns: ["question_attempt_id"];
-            isOneToOne: false;
-            referencedRelation: "question_attempts";
             referencedColumns: ["id"];
           },
         ];

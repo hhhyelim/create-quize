@@ -432,3 +432,948 @@ Gemini 질문 필터 실패. 기본 검증으로 진행합니다. Error: [Google
   statusText: 'Not Found',
   errorDetails: undefined
 }
+⨯ ./src/app/student/activity/[id]/page.tsx:11:1
+Module not found: Can't resolve '../StudentMaterialPreview'
+  [90m 9 |[0m [36mimport[0m { getServiceSupabaseClient } [36mfrom[0m [32m"@/lib/supabase/server"[0m;
+  [90m10 |[0m
+[31m[1m>[0m [90m11 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../StudentMaterialPreview"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m
+  [90m13 |[0m [36mtype[0m [33mStudentActivityPageProps[0m = {
+  [90m14 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/activity/[id]/page.tsx:11:1
+Module not found: Can't resolve '../StudentMaterialPreview'
+  [90m 9 |[0m [36mimport[0m { getServiceSupabaseClient } [36mfrom[0m [32m"@/lib/supabase/server"[0m;
+  [90m10 |[0m
+[31m[1m>[0m [90m11 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../StudentMaterialPreview"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m
+  [90m13 |[0m [36mtype[0m [33mStudentActivityPageProps[0m = {
+  [90m14 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/activity/[id]/page.tsx:11:1
+Module not found: Can't resolve '../StudentMaterialPreview'
+  [90m 9 |[0m [36mimport[0m { getServiceSupabaseClient } [36mfrom[0m [32m"@/lib/supabase/server"[0m;
+  [90m10 |[0m
+[31m[1m>[0m [90m11 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../StudentMaterialPreview"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m
+  [90m13 |[0m [36mtype[0m [33mStudentActivityPageProps[0m = {
+  [90m14 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/activity/[id]/page.tsx:11:1
+Module not found: Can't resolve '../StudentMaterialPreview'
+  [90m 9 |[0m [36mimport[0m { getServiceSupabaseClient } [36mfrom[0m [32m"@/lib/supabase/server"[0m;
+  [90m10 |[0m
+[31m[1m>[0m [90m11 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../StudentMaterialPreview"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m
+  [90m13 |[0m [36mtype[0m [33mStudentActivityPageProps[0m = {
+  [90m14 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/activity/[id]/page.tsx:11:1
+Module not found: Can't resolve '../StudentMaterialPreview'
+  [90m 9 |[0m [36mimport[0m { getServiceSupabaseClient } [36mfrom[0m [32m"@/lib/supabase/server"[0m;
+  [90m10 |[0m
+[31m[1m>[0m [90m11 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../StudentMaterialPreview"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m
+  [90m13 |[0m [36mtype[0m [33mStudentActivityPageProps[0m = {
+  [90m14 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/activity/[id]/page.tsx:11:1
+Module not found: Can't resolve '../StudentMaterialPreview'
+  [90m 9 |[0m [36mimport[0m { getServiceSupabaseClient } [36mfrom[0m [32m"@/lib/supabase/server"[0m;
+  [90m10 |[0m
+[31m[1m>[0m [90m11 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../StudentMaterialPreview"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m
+  [90m13 |[0m [36mtype[0m [33mStudentActivityPageProps[0m = {
+  [90m14 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/activity/[id]/page.tsx:11:1
+Module not found: Can't resolve '../StudentMaterialPreview'
+  [90m 9 |[0m [36mimport[0m { getServiceSupabaseClient } [36mfrom[0m [32m"@/lib/supabase/server"[0m;
+  [90m10 |[0m
+[31m[1m>[0m [90m11 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../StudentMaterialPreview"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m
+  [90m13 |[0m [36mtype[0m [33mStudentActivityPageProps[0m = {
+  [90m14 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/activity/[id]/page.tsx:11:1
+Module not found: Can't resolve '../StudentMaterialPreview'
+  [90m 9 |[0m [36mimport[0m { getServiceSupabaseClient } [36mfrom[0m [32m"@/lib/supabase/server"[0m;
+  [90m10 |[0m
+[31m[1m>[0m [90m11 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../StudentMaterialPreview"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m
+  [90m13 |[0m [36mtype[0m [33mStudentActivityPageProps[0m = {
+  [90m14 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] Uncaught Error: ./src/app/student/activity/[id]/page.tsx:11:1
+Module not found: Can't resolve '../StudentMaterialPreview'
+   9 | import { getServiceSupabaseClient } from "@/lib/supabase/server";
+  10 |
+> 11 | import { StudentMaterialPreview } from "../StudentMaterialPreview";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | type StudentActivityPageProps = {
+  14 |   params: Promise<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/student/activity/[id]/page.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/student/activity/[id]/page.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught Error: ./src/app/student/activity/[id]/page.tsx:11:1
+Module not found: Can't resolve '../StudentMaterialPreview'
+   9 | import { getServiceSupabaseClient } from "@/lib/supabase/server";
+  10 |
+> 11 | import { StudentMaterialPreview } from "../StudentMaterialPreview";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | type StudentActivityPageProps = {
+  14 |   params: Promise<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/student/activity/[id]/page.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/student/activity/[id]/page.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught Error: ./src/app/student/activity/[id]/page.tsx:11:1
+Module not found: Can't resolve '../StudentMaterialPreview'
+   9 | import { getServiceSupabaseClient } from "@/lib/supabase/server";
+  10 |
+> 11 | import { StudentMaterialPreview } from "../StudentMaterialPreview";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | type StudentActivityPageProps = {
+  14 |   params: Promise<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/student/activity/[id]/page.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/student/activity/[id]/page.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught Error: ./src/app/student/activity/[id]/page.tsx:11:1
+Module not found: Can't resolve '../StudentMaterialPreview'
+   9 | import { getServiceSupabaseClient } from "@/lib/supabase/server";
+  10 |
+> 11 | import { StudentMaterialPreview } from "../StudentMaterialPreview";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | type StudentActivityPageProps = {
+  14 |   params: Promise<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/student/activity/[id]/page.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/student/activity/[id]/page.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+  [90m 5 |[0m
+  [90m 6 |[0m [36mimport[0m { [33mStudentMaterialPreview[0m } [36mfrom[0m [32m"../../StudentMaterialPreview"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { [33mInquiryQuestionForm[0m } [36mfrom[0m [32m"./InquiryQuestionForm"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mtype[0m [33mInquiryPageProps[0m = {
+  [90m10 |[0m   params: [33mPromise[0m<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] Uncaught Error: ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+   5 |
+   6 | import { StudentMaterialPreview } from "../../StudentMaterialPreview";
+>  7 | import { InquiryQuestionForm } from "./InquiryQuestionForm";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | type InquiryPageProps = {
+  10 |   params: Promise<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/student/inquiry/[id]/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/student/inquiry/[id]/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught Error: ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+   5 |
+   6 | import { StudentMaterialPreview } from "../../StudentMaterialPreview";
+>  7 | import { InquiryQuestionForm } from "./InquiryQuestionForm";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | type InquiryPageProps = {
+  10 |   params: Promise<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/student/inquiry/[id]/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/student/inquiry/[id]/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught Error: ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+   5 |
+   6 | import { StudentMaterialPreview } from "../../StudentMaterialPreview";
+>  7 | import { InquiryQuestionForm } from "./InquiryQuestionForm";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | type InquiryPageProps = {
+  10 |   params: Promise<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/student/inquiry/[id]/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/student/inquiry/[id]/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught Error: ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+   5 |
+   6 | import { StudentMaterialPreview } from "../../StudentMaterialPreview";
+>  7 | import { InquiryQuestionForm } from "./InquiryQuestionForm";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | type InquiryPageProps = {
+  10 |   params: Promise<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/student/inquiry/[id]/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/student/inquiry/[id]/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught Error: ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+   5 |
+   6 | import { StudentMaterialPreview } from "../../StudentMaterialPreview";
+>  7 | import { InquiryQuestionForm } from "./InquiryQuestionForm";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | type InquiryPageProps = {
+  10 |   params: Promise<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/student/inquiry/[id]/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/student/inquiry/[id]/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught Error: ./src/app/student/inquiry/[id]/page.tsx:7:1
+Module not found: Can't resolve './InquiryQuestionForm'
+   5 |
+   6 | import { StudentMaterialPreview } from "../../StudentMaterialPreview";
+>  7 | import { InquiryQuestionForm } from "./InquiryQuestionForm";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | type InquiryPageProps = {
+  10 |   params: Promise<{ id: string }>;
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/student/inquiry/[id]/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/student/inquiry/[id]/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+Gemini 탐구 질문 스트리밍 실패. fallback 힌트로 진행합니다. TypeError: Invalid state: Controller is already closed
+    at Object.start (src\app\api\inquiry\hint\route.ts:64:24)
+  62 |           })) {
+  63 |             completedHint += chunk;
+> 64 |             controller.enqueue(encodeEvent("delta", { text: chunk }));
+     |                        ^
+  65 |           }
+  66 |
+  67 |           const normalizedHint = normalizeInquiryHint(completedHint, { {
+  code: 'ERR_INVALID_STATE'
+}
+⨯ ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  [90m2 |[0m [36mimport[0m { [33mPageShell[0m } [36mfrom[0m [32m"@/components/PageShell"[0m;
+  [90m3 |[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mCreateActivityForm[0m } [36mfrom[0m [32m"./CreateActivityForm"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mTeacherCreatePage[0m() {
+  [90m7 |[0m   [36mreturn[0m (
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  [90m2 |[0m [36mimport[0m { [33mPageShell[0m } [36mfrom[0m [32m"@/components/PageShell"[0m;
+  [90m3 |[0m
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mCreateActivityForm[0m } [36mfrom[0m [32m"./CreateActivityForm"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mTeacherCreatePage[0m() {
+  [90m7 |[0m   [36mreturn[0m (
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] Uncaught Error: ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/teacher/create/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/teacher/create/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] Uncaught Error: ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/teacher/create/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/teacher/create/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] Uncaught Error: ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/teacher/create/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/teacher/create/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] Uncaught Error: ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/teacher/create/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/teacher/create/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught Error: ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/teacher/create/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/teacher/create/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] Uncaught Error: ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/teacher/create/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/teacher/create/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/teacher/create/page.tsx:4:1
+Module not found: Can't resolve './CreateActivityForm'
+  2 | import { PageShell } from "@/components/PageShell";
+  3 |
+> 4 | import { CreateActivityForm } from "./CreateActivityForm";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function TeacherCreatePage() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found 
+⨯ TypeError: Failed to parse body as FormData.
+    at ignore-listed frames {
+  [cause]: TypeError: missing boundary in content-type header
+      at ignore-listed frames
+}
