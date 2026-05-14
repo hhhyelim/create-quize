@@ -9,7 +9,7 @@ export const fallbackInquiryHint =
   "좋아요. 지금 질문에서 가장 궁금한 말을 하나 골라 보세요. 그리고 그 말에 대해 어떤 일이 생기는지 붙여 다시 써 볼까요?";
 
 const inquiryHintGenerationConfig = {
-  maxOutputTokens: 320,
+  maxOutputTokens: 768,
   temperature: 0.7,
 };
 

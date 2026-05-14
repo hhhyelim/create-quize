@@ -1,11 +1,6 @@
 import { NextResponse } from "next/server";
 
-import {
-  buildFallbackInquiryHint,
-  normalizeInquiryHint,
-  repairInquiryHintIfNeeded,
-  streamInquiryHint,
-} from "@/lib/ai/inquiryHint";
+import { streamInquiryHint } from "@/lib/ai/inquiryHint";
 import {
   prepareInquiryHintContext,
   saveInquiryHintLog,
@@ -16,6 +11,8 @@ const hintSavedMessage = "힌트를 받았어요.";
 const hintSaveFailedMessage =
   "힌트를 저장하지 못했어요. 다시 해 주세요.";
 const hintLoadFailedMessage = "힌트를 받을 수 없어요. 다시 해 주세요.";
+const geminiEmptyMessage =
+  "Gemini 응답을 받지 못했어요. 잠시 후 다시 시도해 주세요.";
 
 function encodeEvent(event: string, data: unknown) {
   return encoder.encode(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
@@ -98,6 +95,14 @@ export async function POST(request: Request) {
           }
         }
 
+        function sendGeminiEmptyError() {
+          safeEnqueue("error", {
+            aiHint: "",
+            ok: false,
+            studentMessage: geminiEmptyMessage,
+          });
+        }
+
         safeEnqueue("meta", {
           ok: true,
           studentMessage: hintSavedMessage,
@@ -112,30 +117,22 @@ export async function POST(request: Request) {
             }
           }
 
-          const normalizedHint = normalizeInquiryHint(completedHint, hintInput);
-          const repairedHint = await repairInquiryHintIfNeeded(
-            normalizedHint,
-            hintInput,
-          );
+          completedHint = completedHint.trim();
 
-          if (repairedHint !== completedHint.trim()) {
-            completedHint = repairedHint;
-
-            if (!safeEnqueue("replace", { text: repairedHint })) {
-              return;
-            }
-          } else {
-            completedHint = completedHint.trim();
+          if (!completedHint) {
+            sendGeminiEmptyError();
+            return;
           }
         } catch (error) {
           if (isClosedControllerError(error) || request.signal.aborted) {
             return;
           }
 
-          console.error("Gemini inquiry hint stream failed. Using fallback.", error);
-          completedHint = buildFallbackInquiryHint(hintInput);
+          console.error("Gemini inquiry hint stream failed.", error);
+          completedHint = completedHint.trim();
 
-          if (!safeEnqueue("replace", { text: completedHint })) {
+          if (!completedHint) {
+            sendGeminiEmptyError();
             return;
           }
         }
