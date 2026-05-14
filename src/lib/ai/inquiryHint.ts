@@ -93,34 +93,8 @@ export function normalizeInquiryHint(
     studentText: string;
   },
 ) {
-  const aiHint = text.trim();
-
-  if (!aiHint || aiHint.length < 5) {
-    return buildFallbackInquiryHint(input);
-  }
-
-  return aiHint;
-}
-
-function looksIncompleteInquiryHint(text: string) {
-  const aiHint = text.trim();
-
-  if (!aiHint || aiHint.length < 5) {
-    return false;
-  }
-
-  const hasNaturalEnding =
-    /[.!?。？！]$/.test(aiHint) ||
-    /(요|다|까|까요|세요|해요|봐요|볼까요)$/.test(aiHint);
-
-  return (
-    /[*_`~]$/.test(aiHint) ||
-    (aiHint.length < 80 && !hasNaturalEnding)
-  );
-}
-
-function hasCoachingMove(text: string) {
-  return /[?？]|볼까요|골라|떠올|써\s*볼까요|정해\s*볼까요/.test(text);
+  void input;
+  return text.trim();
 }
 
 export async function repairInquiryHintIfNeeded(
@@ -136,36 +110,8 @@ export async function repairInquiryHintIfNeeded(
     studentText: string;
   },
 ) {
-  const aiHint = text.trim();
-
-  if (!looksIncompleteInquiryHint(aiHint)) {
-    return aiHint;
-  }
-
-  try {
-    const result = await getInquiryHintModel().generateContent(`아래 AI 코칭 응답이 쓰다 만 문장처럼 보입니다.
-fallback으로 바꾸지 말고, 같은 뜻을 살려 초등학생에게 자연스러운 코칭 2~3문장으로 완성하세요.
-완성된 질문 예시는 쓰지 말고, 학생이 직접 다시 쓰도록 도와주세요.
-
-${buildInquiryHintContext(input)}
-
-쓰다 만 응답:
-${aiHint}`);
-
-    const repairedHint = normalizeInquiryHint(result.response.text(), input);
-
-    if (
-      looksIncompleteInquiryHint(repairedHint) ||
-      !hasCoachingMove(repairedHint)
-    ) {
-      return buildFallbackInquiryHint(input);
-    }
-
-    return repairedHint;
-  } catch (error) {
-    console.error("Gemini 탐구 질문 힌트 보정 실패. 기존 응답을 유지합니다.", error);
-    return aiHint;
-  }
+  void input;
+  return text.trim();
 }
 
 function getInquiryHintModel() {
