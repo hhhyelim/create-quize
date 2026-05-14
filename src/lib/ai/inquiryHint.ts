@@ -149,23 +149,40 @@ export async function* streamInquiryHint(input: InquiryHintInput) {
   );
 
   for await (const chunk of result.stream) {
-    const text = chunk.text();
+    const candidate = chunk.candidates?.[0];
+    const text =
+      candidate?.content?.parts
+        ?.map((part) => ("text" in part ? (part.text ?? "") : ""))
+        .join("") ?? "";
+    const finishReason = candidate?.finishReason;
+
+    if (finishReason && finishReason !== "STOP") {
+      console.warn("Gemini inquiry hint stream chunk finished early.", {
+        finishMessage: candidate?.finishMessage,
+        finishReason,
+        safetyRatings: candidate?.safetyRatings,
+      });
+    }
 
     if (text) {
       yield text;
     }
   }
 
-  const response = await result.response;
-  const candidate = response.candidates?.[0];
-  const finishReason = candidate?.finishReason;
+  try {
+    const response = await result.response;
+    const candidate = response.candidates?.[0];
+    const finishReason = candidate?.finishReason;
 
-  if (finishReason && finishReason !== "STOP") {
-    console.warn("Gemini inquiry hint stream finished early.", {
-      finishMessage: candidate?.finishMessage,
-      finishReason,
-      safetyRatings: candidate?.safetyRatings,
-    });
+    if (finishReason && finishReason !== "STOP") {
+      console.warn("Gemini inquiry hint stream finished early.", {
+        finishMessage: candidate?.finishMessage,
+        finishReason,
+        safetyRatings: candidate?.safetyRatings,
+      });
+    }
+  } catch (error) {
+    console.warn("Gemini inquiry hint stream response metadata failed.", error);
   }
 }
 
