@@ -11,7 +11,6 @@ import { parseMaterialAnalysis } from "./inquiry-common";
 export type InquiryHintResult = {
   ok: boolean;
   aiHint: string;
-  step: number;
   studentMessage: string;
 };
 
@@ -29,10 +28,14 @@ export type InquiryHintContext = {
     aiHint: string;
     studentText: string;
   }>;
-  step: number;
   studentId: string;
   studentText: string;
 };
+
+const invalidStudentMessage = "참여 정보를 다시 확인해 주세요.";
+const hintSavedMessage = "힌트를 받았어요.";
+const hintSaveFailedMessage =
+  "힌트를 저장하지 못했어요. 다시 해 주세요.";
 
 export async function prepareInquiryHintContext(
   body: unknown,
@@ -48,8 +51,7 @@ export async function prepareInquiryHintContext(
       result: {
         ok: false,
         aiHint: "",
-        step: 0,
-        studentMessage: "참여 정보를 다시 확인해 주세요.",
+        studentMessage: invalidStudentMessage,
       },
     };
   }
@@ -57,35 +59,26 @@ export async function prepareInquiryHintContext(
   const { activityId, studentId } = parsed.data;
   const studentText = parsed.data.studentText.trim();
   const supabase = getServiceSupabaseClient();
-  const [
-    { data: activity },
-    { data: student },
-    { count },
-    { data: previousLogs },
-  ] = await Promise.all([
-    supabase
-      .from("activities")
-      .select("id,material_text,ai_material_analysis")
-      .eq("id", activityId)
-      .single(),
-    supabase
-      .from("students")
-      .select("id,activity_id")
-      .eq("id", studentId)
-      .single(),
-    supabase
-      .from("coaching_logs")
-      .select("id", { count: "exact", head: true })
-      .eq("activity_id", activityId)
-      .eq("student_id", studentId),
-    supabase
-      .from("coaching_logs")
-      .select("student_text,ai_hint")
-      .eq("activity_id", activityId)
-      .eq("student_id", studentId)
-      .order("created_at", { ascending: true })
-      .limit(6),
-  ]);
+  const [{ data: activity }, { data: student }, { data: previousLogs }] =
+    await Promise.all([
+      supabase
+        .from("activities")
+        .select("id,material_text,ai_material_analysis")
+        .eq("id", activityId)
+        .single(),
+      supabase
+        .from("students")
+        .select("id,activity_id")
+        .eq("id", studentId)
+        .single(),
+      supabase
+        .from("coaching_logs")
+        .select("student_text,ai_hint")
+        .eq("activity_id", activityId)
+        .eq("student_id", studentId)
+        .order("created_at", { ascending: true })
+        .limit(6),
+    ]);
 
   if (!activity || !student || student.activity_id !== activity.id) {
     return {
@@ -93,8 +86,7 @@ export async function prepareInquiryHintContext(
       result: {
         ok: false,
         aiHint: "",
-        step: 0,
-        studentMessage: "참여 정보를 다시 확인해 주세요.",
+        studentMessage: invalidStudentMessage,
       },
     };
   }
@@ -109,7 +101,6 @@ export async function prepareInquiryHintContext(
         aiHint: log.ai_hint,
         studentText: log.student_text,
       })),
-      step: (count ?? 0) + 1,
       studentId: student.id,
       studentText,
     },
@@ -119,7 +110,6 @@ export async function prepareInquiryHintContext(
 export async function saveInquiryHintLog(input: {
   activityId: string;
   aiHint: string;
-  step: number;
   studentId: string;
   studentText: string;
 }) {
@@ -128,7 +118,6 @@ export async function saveInquiryHintLog(input: {
   return supabase.from("coaching_logs").insert({
     activity_id: input.activityId,
     ai_hint: input.aiHint,
-    step: input.step,
     student_id: input.studentId,
     student_text: input.studentText,
   });
@@ -148,13 +137,11 @@ export async function getInquiryHint(
     analysis: context.analysis,
     materialText: context.materialText,
     previousTurns: context.previousTurns,
-    step: context.step,
     studentText: context.studentText,
   });
   const { error } = await saveInquiryHintLog({
     activityId: context.activityId,
     aiHint,
-    step: context.step,
     studentId: context.studentId,
     studentText: context.studentText,
   });
@@ -163,15 +150,13 @@ export async function getInquiryHint(
     return {
       ok: false,
       aiHint,
-      step: context.step,
-      studentMessage: "힌트를 저장하지 못했어요. 다시 해 주세요.",
+      studentMessage: hintSaveFailedMessage,
     };
   }
 
   return {
     ok: true,
     aiHint,
-    step: context.step,
-    studentMessage: "힌트를 받았어요.",
+    studentMessage: hintSavedMessage,
   };
 }

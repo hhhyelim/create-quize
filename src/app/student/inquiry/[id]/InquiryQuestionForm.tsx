@@ -17,7 +17,6 @@ type StreamEvent = {
   data: {
     aiHint?: string;
     ok?: boolean;
-    step?: number;
     studentMessage?: string;
     text?: string;
   };
@@ -71,7 +70,6 @@ export function InquiryQuestionForm({
   studentId,
 }: InquiryQuestionFormProps) {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
-  const [currentStep, setCurrentStep] = useState(0);
   const [hintCount, setHintCount] = useState(0);
   const [isHintLoading, setIsHintLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -190,10 +188,6 @@ export function InquiryQuestionForm({
             continue;
           }
 
-          if (parsed.event === "meta") {
-            setCurrentStep(parsed.data.step ?? 0);
-          }
-
           if (parsed.event === "delta" && parsed.data.text) {
             updateAiMessage(aiMessageId, parsed.data.text, "append");
           }
@@ -204,7 +198,6 @@ export function InquiryQuestionForm({
 
           if (parsed.event === "done") {
             setHintCount((current) => current + 1);
-            setCurrentStep(parsed.data.step ?? currentStep);
             setMessageTone("success");
             setMessage(parsed.data.studentMessage ?? "힌트를 받았어요.");
           }

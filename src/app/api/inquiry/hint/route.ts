@@ -12,6 +12,10 @@ import {
 } from "@/lib/inquiry/get-hint";
 
 const encoder = new TextEncoder();
+const hintSavedMessage = "힌트를 받았어요.";
+const hintSaveFailedMessage =
+  "힌트를 저장하지 못했어요. 다시 해 주세요.";
+const hintLoadFailedMessage = "힌트를 받을 수 없어요. 다시 해 주세요.";
 
 function encodeEvent(event: string, data: unknown) {
   return encoder.encode(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
@@ -20,7 +24,6 @@ function encodeEvent(event: string, data: unknown) {
 async function saveHintOrThrow(input: {
   activityId: string;
   aiHint: string;
-  step: number;
   studentId: string;
   studentText: string;
 }) {
@@ -48,40 +51,27 @@ export async function POST(request: Request) {
         controller.enqueue(
           encodeEvent("meta", {
             ok: true,
-            step: context.step,
-            studentMessage: "힌트를 받았어요.",
+            studentMessage: hintSavedMessage,
           }),
         );
 
         try {
-          for await (const chunk of streamInquiryHint({
+          const hintInput = {
             analysis: context.analysis,
             materialText: context.materialText,
             previousTurns: context.previousTurns,
-            step: context.step,
             studentText: context.studentText,
-          })) {
+          };
+
+          for await (const chunk of streamInquiryHint(hintInput)) {
             completedHint += chunk;
             controller.enqueue(encodeEvent("delta", { text: chunk }));
           }
 
-          const normalizedHint = normalizeInquiryHint(completedHint, {
-            analysis: context.analysis,
-            materialText: context.materialText,
-            previousTurns: context.previousTurns,
-            step: context.step,
-            studentText: context.studentText,
-          });
-
+          const normalizedHint = normalizeInquiryHint(completedHint, hintInput);
           const repairedHint = await repairInquiryHintIfNeeded(
             normalizedHint,
-            {
-              analysis: context.analysis,
-              materialText: context.materialText,
-              previousTurns: context.previousTurns,
-              step: context.step,
-              studentText: context.studentText,
-            },
+            hintInput,
           );
 
           if (repairedHint !== completedHint.trim()) {
@@ -91,15 +81,11 @@ export async function POST(request: Request) {
             completedHint = completedHint.trim();
           }
         } catch (error) {
-          console.error(
-            "Gemini 탐구 질문 스트리밍 실패. fallback 힌트로 진행합니다.",
-            error,
-          );
+          console.error("Gemini inquiry hint stream failed. Using fallback.", error);
           completedHint = buildFallbackInquiryHint({
             analysis: context.analysis,
             materialText: context.materialText,
             previousTurns: context.previousTurns,
-            step: context.step,
             studentText: context.studentText,
           });
           controller.enqueue(encodeEvent("replace", { text: completedHint }));
@@ -109,7 +95,6 @@ export async function POST(request: Request) {
           await saveHintOrThrow({
             activityId: context.activityId,
             aiHint: completedHint,
-            step: context.step,
             studentId: context.studentId,
             studentText: context.studentText,
           });
@@ -118,18 +103,16 @@ export async function POST(request: Request) {
             encodeEvent("done", {
               aiHint: completedHint,
               ok: true,
-              step: context.step,
-              studentMessage: "힌트를 받았어요.",
+              studentMessage: hintSavedMessage,
             }),
           );
         } catch (error) {
-          console.error("탐구 질문 힌트 저장 실패.", error);
+          console.error("Failed to save inquiry hint.", error);
           controller.enqueue(
             encodeEvent("error", {
               aiHint: completedHint,
               ok: false,
-              step: context.step,
-              studentMessage: "힌트를 저장하지 못했어요. 다시 해 주세요.",
+              studentMessage: hintSaveFailedMessage,
             }),
           );
         } finally {
@@ -149,8 +132,7 @@ export async function POST(request: Request) {
       {
         aiHint: "",
         ok: false,
-        step: 0,
-        studentMessage: "힌트를 받지 못했어요. 다시 해 주세요.",
+        studentMessage: hintLoadFailedMessage,
       },
       { status: 500 },
     );

@@ -229,7 +229,6 @@ export type Database = {
           id: string;
           activity_id: string;
           student_id: string;
-          step: number;
           student_text: string;
           ai_hint: string;
           created_at: string;
@@ -238,7 +237,6 @@ export type Database = {
           id?: string;
           activity_id: string;
           student_id: string;
-          step?: number;
           student_text: string;
           ai_hint: string;
           created_at?: string;
@@ -247,7 +245,6 @@ export type Database = {
           id?: string;
           activity_id?: string;
           student_id?: string;
-          step?: number;
           student_text?: string;
           ai_hint?: string;
           created_at?: string;
