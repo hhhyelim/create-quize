@@ -71,7 +71,11 @@ function parseQuestionSafetyResult(text: string): QuestionSafetyResult {
   const parsed = questionSafetySchema.parse(
     JSON.parse(stripJsonCodeFence(text)),
   );
-  const reason = parsed.is_safe ? "Valid" : parsed.reason;
+  const reason = parsed.is_safe
+    ? "Valid"
+    : parsed.reason === "Valid"
+      ? "Profanity"
+      : parsed.reason;
 
   return {
     isValid: parsed.is_safe && reason === "Valid",
