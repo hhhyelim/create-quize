@@ -14,16 +14,12 @@ type SubmitQuestionResponse = {
   accepted: boolean;
   question?: Question;
   reason:
-    | "accepted"
-    | "unrelated"
-    | "unclear"
-    | "not_question"
-    | "harmful"
-    | "personal_info"
-    | "attack"
-    | "empty"
-    | "too_short"
-    | "server_error";
+    | "Empty"
+    | "HateSpeech"
+    | "Meaningless"
+    | "Profanity"
+    | "server_error"
+    | "Valid";
   rejectedCount: number;
   studentMessage: string;
   warningRequired: boolean;

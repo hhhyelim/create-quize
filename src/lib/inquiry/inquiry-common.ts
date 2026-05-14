@@ -1,39 +1,19 @@
 import type { MaterialAnalysis } from "@/lib/ai/gemini";
+import {
+  questionInputMessages,
+  validateQuestionInput,
+  type QuestionInputValidationReason,
+} from "@/lib/questions/question-input-validator";
 
-export type InquirySafetyReason =
-  | "accepted"
-  | "attack"
-  | "empty"
-  | "harmful"
-  | "personal_info"
-  | "too_short";
+export type InquirySafetyReason = QuestionInputValidationReason;
 
 export const inquirySafetyMessages: Record<InquirySafetyReason, string> = {
-  accepted: "질문이 등록되었어요.",
-  attack: "친구를 공격하는 말은 쓸 수 없어요.",
-  empty: "궁금한 점을 문장으로 써 주세요.",
-  harmful: "친구들이 함께 볼 수 있는 말로 써 주세요.",
-  personal_info: "개인정보를 묻는 질문은 쓸 수 없어요.",
-  too_short: "조금 더 길게 써 주세요.",
+  Empty: questionInputMessages.Empty,
+  HateSpeech: questionInputMessages.HateSpeech,
+  Meaningless: questionInputMessages.Meaningless,
+  Profanity: questionInputMessages.Profanity,
+  Valid: questionInputMessages.Valid,
 };
-
-const unsafePatterns = [
-  {
-    message: inquirySafetyMessages.harmful,
-    reason: "harmful" as const,
-    words: ["죽어", "죽이고", "죽일", "때려", "패고", "폭력", "자살"],
-  },
-  {
-    message: inquirySafetyMessages.personal_info,
-    reason: "personal_info" as const,
-    words: ["전화번호", "주소", "비밀번호", "주민번호", "집 어디", "사는 곳"],
-  },
-  {
-    message: inquirySafetyMessages.attack,
-    reason: "attack" as const,
-    words: ["바보", "멍청", "못생", "싫어", "꺼져", "왕따"],
-  },
-];
 
 export function parseMaterialAnalysis(value: unknown): MaterialAnalysis | null {
   if (!value || typeof value !== "object") {
@@ -58,41 +38,16 @@ export function parseMaterialAnalysis(value: unknown): MaterialAnalysis | null {
 
 export function runInquirySafetyCheck(questionText: string): {
   accepted: boolean;
+  normalizedText: string;
   reason: InquirySafetyReason;
   studentMessage: string;
 } {
-  if (!questionText) {
-    return {
-      accepted: false,
-      reason: "empty",
-      studentMessage: inquirySafetyMessages.empty,
-    };
-  }
-
-  if (questionText.length < 2) {
-    return {
-      accepted: false,
-      reason: "too_short",
-      studentMessage: inquirySafetyMessages.too_short,
-    };
-  }
-
-  const normalized = questionText.replace(/\s/g, "").toLowerCase();
-  const unsafeMatch = unsafePatterns.find((pattern) =>
-    pattern.words.some((word) => normalized.includes(word.replace(/\s/g, ""))),
-  );
-
-  if (unsafeMatch) {
-    return {
-      accepted: false,
-      reason: unsafeMatch.reason,
-      studentMessage: unsafeMatch.message,
-    };
-  }
+  const result = validateQuestionInput(questionText);
 
   return {
-    accepted: true,
-    reason: "accepted",
-    studentMessage: inquirySafetyMessages.accepted,
+    accepted: result.isValid,
+    normalizedText: result.normalizedText,
+    reason: result.reason,
+    studentMessage: result.studentMessage,
   };
 }

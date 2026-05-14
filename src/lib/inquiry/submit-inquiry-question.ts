@@ -48,8 +48,8 @@ export async function submitInquiryQuestion(
   }
 
   const { activityId, studentId } = parsed.data;
-  const questionText = parsed.data.questionText.trim();
-  const safetyResult = runInquirySafetyCheck(questionText);
+  const safetyResult = runInquirySafetyCheck(parsed.data.questionText);
+  const questionText = safetyResult.normalizedText;
 
   if (!safetyResult.accepted) {
     return {
@@ -110,7 +110,7 @@ export async function submitInquiryQuestion(
       ...question,
       status: "accepted",
     },
-    reason: "accepted",
-    studentMessage: inquirySafetyMessages.accepted,
+    reason: "Valid",
+    studentMessage: inquirySafetyMessages.Valid,
   };
 }

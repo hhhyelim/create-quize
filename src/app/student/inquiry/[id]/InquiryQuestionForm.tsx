@@ -1,9 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type KeyboardEvent } from "react";
 
 import { Button } from "@/components/Button";
 import { Textarea } from "@/components/Textarea";
+import { validateQuestionInput } from "@/lib/questions/question-input-validator";
 
 type ChatMessage = {
   id: string;
@@ -25,13 +26,12 @@ type StreamEvent = {
 type SubmitInquiryResponse = {
   accepted: boolean;
   reason:
-    | "accepted"
-    | "attack"
-    | "empty"
-    | "harmful"
-    | "personal_info"
+    | "Empty"
+    | "HateSpeech"
+    | "Meaningless"
+    | "Profanity"
     | "server_error"
-    | "too_short";
+    | "Valid";
   studentMessage: string;
 };
 
@@ -39,50 +39,6 @@ type InquiryQuestionFormProps = {
   activityId: string;
   studentId: string;
 };
-
-const unsafeWords = [
-  "죽어",
-  "죽이고",
-  "죽일",
-  "때려",
-  "패고",
-  "폭력",
-  "자살",
-  "전화번호",
-  "주소",
-  "비밀번호",
-  "주민번호",
-  "집 어디",
-  "사는 곳",
-  "바보",
-  "멍청",
-  "못생",
-  "싫어",
-  "꺼져",
-  "왕따",
-];
-
-function isQuestionLike(text: string) {
-  return /[?？]$/.test(text.trim()) || /(까|나요|가요|까요|왜|어떻게|무엇|어떤|만약)/.test(text);
-}
-
-function passesSafetyCheck(text: string) {
-  const normalized = text.replace(/\s/g, "").toLowerCase();
-
-  return !unsafeWords.some((word) =>
-    normalized.includes(word.replace(/\s/g, "").toLowerCase()),
-  );
-}
-
-function hasInquiryShape(text: string) {
-  const trimmed = text.trim();
-
-  return (
-    trimmed.length >= 2 &&
-    isQuestionLike(trimmed) &&
-    passesSafetyCheck(trimmed)
-  );
-}
 
 function makeMessageId(role: ChatMessage["role"]) {
   return `${role}-${Date.now()}-${Math.random().toString(36).slice(2)}`;
@@ -127,15 +83,29 @@ export function InquiryQuestionForm({
   const [studentText, setStudentText] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
+  const finalQuestionValidation = useMemo(
+    () => validateQuestionInput(studentText),
+    [studentText],
+  );
+
   const canSubmitFinalQuestion = useMemo(() => {
     return (
       hintCount > 0 &&
       studentText.trim() !== lastHintStudentText &&
-      hasInquiryShape(studentText)
+      finalQuestionValidation.isValid
     );
-  }, [hintCount, lastHintStudentText, studentText]);
+  }, [
+    finalQuestionValidation.isValid,
+    hintCount,
+    lastHintStudentText,
+    studentText,
+  ]);
 
-  function updateAiMessage(messageId: string, text: string, mode: "append" | "replace") {
+  function updateAiMessage(
+    messageId: string,
+    text: string,
+    mode: "append" | "replace",
+  ) {
     setChatMessages((current) =>
       current.map((messageItem) =>
         messageItem.id === messageId
@@ -251,7 +221,7 @@ export function InquiryQuestionForm({
     } catch {
       updateAiMessage(
         aiMessageId,
-        "좋아요. 지금 질문에서 가장 궁금한 낱말을 하나 골라 보세요. 그리고 그 낱말에 대해 왜, 어떻게, 어떤 일이 생기는지 중 하나를 붙여 다시 써 보세요.",
+        "좋아요. 지금 질문에서 가장 궁금한 말을 하나 골라 보세요. 그리고 그 말에 대해 어떤 일이 생기는지 붙여 다시 써 보세요.",
         "replace",
       );
       setMessageTone("error");
@@ -262,7 +232,17 @@ export function InquiryQuestionForm({
   }
 
   async function submitFinalQuestion() {
-    if (isSubmitting || submitted || !canSubmitFinalQuestion) {
+    if (isSubmitting || submitted) {
+      return;
+    }
+
+    if (hintCount <= 0 || studentText.trim() === lastHintStudentText) {
+      return;
+    }
+
+    if (!finalQuestionValidation.isValid) {
+      setMessageTone("error");
+      setMessage(finalQuestionValidation.studentMessage);
       return;
     }
 
@@ -300,6 +280,19 @@ export function InquiryQuestionForm({
     }
   }
 
+  function handleQuestionKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
+    if (
+      event.key !== "Enter" ||
+      event.shiftKey ||
+      event.nativeEvent.isComposing
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    void submitFinalQuestion();
+  }
+
   return (
     <div className="grid gap-5">
       {message ? (
@@ -332,7 +325,7 @@ export function InquiryQuestionForm({
           ))
         ) : (
           <p className="rounded-xl bg-white p-4 text-lg leading-8 text-slate-600 ring-1 ring-slate-200">
-            질문을 쓰고 힌트를 받으면 대화가 시작돼요.
+            질문을 적고 힌트를 받으면 탐구가 시작돼요.
           </p>
         )}
       </section>
@@ -342,14 +335,17 @@ export function InquiryQuestionForm({
         <Textarea
           disabled={isSubmitting || submitted}
           onChange={(event) => setStudentText(event.target.value)}
-          placeholder="더 깊게 알아보고 싶은 질문을 써 보세요."
+          onKeyDown={handleQuestionKeyDown}
+          placeholder="깊게 알아보고 싶은 질문을 써 보세요."
           value={studentText}
         />
       </label>
 
       {!canSubmitFinalQuestion && !submitted ? (
         <p className="rounded-xl bg-slate-50 p-4 text-base font-bold text-slate-600">
-          AI의 힌트와 함께 탐구 질문을 더 다듬어 써 볼까요?
+          {studentText.trim() && !finalQuestionValidation.isValid
+            ? finalQuestionValidation.studentMessage
+            : "AI의 힌트와 함께 탐구 질문을 더 다듬어 써 볼까요?"}
         </p>
       ) : null}
 
