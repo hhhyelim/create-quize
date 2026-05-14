@@ -4,6 +4,10 @@ import { PageShell } from "@/components/PageShell";
 import { materialTypeLabels } from "@/lib/activity-labels";
 import { getServiceSupabaseClient } from "@/lib/supabase/server";
 
+import { DeleteActivityForm } from "./DeleteActivityForm";
+
+export const dynamic = "force-dynamic";
+
 export default async function TeacherPage() {
   const supabase = getServiceSupabaseClient();
   const { data: activities, error } = await supabase
@@ -63,9 +67,15 @@ export default async function TeacherPage() {
                   {Math.round(activity.time_limit_sec / 60)}분
                 </p>
               </div>
-              <Button href={`/teacher/activity/${activity.id}`} variant="quiet">
-                자세히 보기
-              </Button>
+              <div className="flex flex-wrap gap-2 md:justify-end">
+                <Button href={`/teacher/activity/${activity.id}`} variant="quiet">
+                  자세히 보기
+                </Button>
+                <DeleteActivityForm
+                  activityId={activity.id}
+                  activityTitle={activity.title}
+                />
+              </div>
             </Card>
           ))
         ) : (
