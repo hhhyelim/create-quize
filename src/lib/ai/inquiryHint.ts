@@ -55,8 +55,8 @@ export function buildFallbackInquiryHint(input: InquiryHintInput) {
       .join(", ") ||
     "자료에서 본 내용";
 
-  if (studentText.length <= 8 && !/[?？]$/.test(studentText)) {
-    return `좋아요. ${materialClue} 중에서 더 알고 싶은 대상을 하나 고르고, 그 대상이 어떻게 달라지는지 붙여 볼까요?`;
+  if (studentText.length <= 3 && !/[?？]$/.test(studentText)) {
+    return `내용이 조금 짧아요. ${materialClue} 중에서 더 알고 싶은 대상을 하나 고르고, 그 대상이 어떻게 달라지는지 붙여 볼까요?`;
   }
 
   if (input.previousTurns?.length) {
