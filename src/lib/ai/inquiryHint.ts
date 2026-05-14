@@ -155,6 +155,18 @@ export async function* streamInquiryHint(input: InquiryHintInput) {
       yield text;
     }
   }
+
+  const response = await result.response;
+  const candidate = response.candidates?.[0];
+  const finishReason = candidate?.finishReason;
+
+  if (finishReason && finishReason !== "STOP") {
+    console.warn("Gemini inquiry hint stream finished early.", {
+      finishMessage: candidate?.finishMessage,
+      finishReason,
+      safetyRatings: candidate?.safetyRatings,
+    });
+  }
 }
 
 export async function generateInquiryHint(input: InquiryHintInput) {
