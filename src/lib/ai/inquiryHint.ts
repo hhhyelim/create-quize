@@ -198,3 +198,16 @@ export async function generateInquiryHint(input: InquiryHintInput) {
     return buildFallbackInquiryHint(input);
   }
 }
+
+export async function generateInquiryHintStrict(input: InquiryHintInput) {
+  const result = await getInquiryHintModel().generateContent(
+    buildInquiryHintContext(input),
+  );
+  const aiHint = normalizeInquiryHint(result.response.text(), input);
+
+  if (!aiHint) {
+    throw new Error("Gemini returned an empty inquiry hint.");
+  }
+
+  return aiHint;
+}

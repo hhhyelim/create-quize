@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { streamInquiryHint } from "@/lib/ai/inquiryHint";
+import { generateInquiryHintStrict } from "@/lib/ai/inquiryHint";
 import {
   prepareInquiryHintContext,
   saveInquiryHintLog,
@@ -11,19 +11,11 @@ const hintSavedMessage = "힌트를 받았어요.";
 const hintSaveFailedMessage =
   "힌트를 저장하지 못했어요. 다시 해 주세요.";
 const hintLoadFailedMessage = "힌트를 받을 수 없어요. 다시 해 주세요.";
-const geminiEmptyMessage =
-  "Gemini 응답을 받지 못했어요. 잠시 후 다시 시도해 주세요.";
+const geminiFailedMessage =
+  "Gemini 응답을 끝까지 받지 못했어요. 잠시 후 다시 시도해 주세요.";
 
 function encodeEvent(event: string, data: unknown) {
   return encoder.encode(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
-}
-
-function isClosedControllerError(error: unknown) {
-  return (
-    error instanceof TypeError &&
-    (error.message.includes("Controller is already closed") ||
-      error.message.includes("Invalid state"))
-  );
 }
 
 async function saveHintOrThrow(input: {
@@ -51,114 +43,55 @@ export async function POST(request: Request) {
     const { context } = prepared;
     const stream = new ReadableStream({
       async start(controller) {
-        let completedHint = "";
-        let isStreamClosed = false;
-        const hintInput = {
-          analysis: context.analysis,
-          materialText: context.materialText,
-          previousTurns: context.previousTurns,
-          studentText: context.studentText,
-        };
-
-        function safeEnqueue(event: string, data: unknown) {
-          if (isStreamClosed || request.signal.aborted) {
-            isStreamClosed = true;
-            return false;
-          }
-
-          try {
-            controller.enqueue(encodeEvent(event, data));
-            return true;
-          } catch (error) {
-            if (!isClosedControllerError(error)) {
-              throw error;
-            }
-
-            isStreamClosed = true;
-            return false;
-          }
-        }
-
-        function safeClose() {
-          if (isStreamClosed) {
-            return;
-          }
-
-          try {
-            controller.close();
-          } catch (error) {
-            if (!isClosedControllerError(error)) {
-              throw error;
-            }
-          } finally {
-            isStreamClosed = true;
-          }
-        }
-
-        function sendGeminiEmptyError() {
-          safeEnqueue("error", {
-            aiHint: "",
-            ok: false,
-            studentMessage: geminiEmptyMessage,
-          });
-        }
-
-        safeEnqueue("meta", {
-          ok: true,
-          studentMessage: hintSavedMessage,
-        });
-
-        try {
-          for await (const chunk of streamInquiryHint(hintInput)) {
-            completedHint += chunk;
-
-            if (!safeEnqueue("delta", { text: chunk })) {
-              return;
-            }
-          }
-
-          completedHint = completedHint.trim();
-
-          if (!completedHint) {
-            sendGeminiEmptyError();
-            return;
-          }
-        } catch (error) {
-          if (isClosedControllerError(error) || request.signal.aborted) {
-            return;
-          }
-
-          console.error("Gemini inquiry hint stream failed.", error);
-          completedHint = completedHint.trim();
-
-          if (!completedHint) {
-            sendGeminiEmptyError();
-            return;
-          }
+        function enqueue(event: string, data: unknown) {
+          controller.enqueue(encodeEvent(event, data));
         }
 
         try {
-          await saveHintOrThrow({
-            activityId: context.activityId,
-            aiHint: completedHint,
-            studentId: context.studentId,
-            studentText: context.studentText,
-          });
-
-          safeEnqueue("done", {
-            aiHint: completedHint,
+          enqueue("meta", {
             ok: true,
             studentMessage: hintSavedMessage,
           });
+
+          const aiHint = await generateInquiryHintStrict({
+            analysis: context.analysis,
+            materialText: context.materialText,
+            previousTurns: context.previousTurns,
+            studentText: context.studentText,
+          });
+
+          enqueue("delta", { text: aiHint });
+
+          try {
+            await saveHintOrThrow({
+              activityId: context.activityId,
+              aiHint,
+              studentId: context.studentId,
+              studentText: context.studentText,
+            });
+
+            enqueue("done", {
+              aiHint,
+              ok: true,
+              studentMessage: hintSavedMessage,
+            });
+          } catch (error) {
+            console.error("Failed to save inquiry hint.", error);
+            enqueue("error", {
+              aiHint,
+              ok: false,
+              studentMessage: hintSaveFailedMessage,
+            });
+          }
         } catch (error) {
-          console.error("Failed to save inquiry hint.", error);
-          safeEnqueue("error", {
-            aiHint: completedHint,
+          console.error("Gemini inquiry hint failed.", error);
+          enqueue("error", {
+            aiHint: "",
             ok: false,
-            studentMessage: hintSaveFailedMessage,
+            studentMessage: geminiFailedMessage,
           });
         } finally {
-          safeClose();
+          controller.close();
         }
       },
     });
