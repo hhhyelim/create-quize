@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { validateQuestionSafetyWithGemini } from "@/lib/ai/questionSafety";
 import {
   buildFallbackInquiryHint,
   normalizeInquiryHint,
@@ -89,6 +90,17 @@ export async function POST(request: Request) {
             controller.enqueue(encodeEvent("replace", { text: repairedHint }));
           } else {
             completedHint = completedHint.trim();
+          }
+
+          try {
+            const safetyResult = await validateQuestionSafetyWithGemini(completedHint);
+
+            if (!safetyResult.isValid) {
+              completedHint = "좋아요. 친구를 배려하는 말로 바꿔서 다시 질문을 다듬어 볼까요?";
+              controller.enqueue(encodeEvent("replace", { text: completedHint }));
+            }
+          } catch (error) {
+            console.error("Gemini 탐구 질문 힌트 안전 필터 실패. 기존 응답을 유지합니다.", error);
           }
         } catch (error) {
           console.error(
